@@ -1,7 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Redis;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,4 +16,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/test', function () {
+
+    // after : Set the CACHE_DRIVER and SESSION_DRIVER variables to redis in .env file
+//    Redis::set('name', 'taylor');
+//    print_r(Redis::get('name'));
+
+    Cache::put('name', 'taylor-cache', 600); // 600 seconds = 1 hour
+    print_r(Cache::get('name'));
 });
